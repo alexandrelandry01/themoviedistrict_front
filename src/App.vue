@@ -1,26 +1,45 @@
+<!-- eslint-disable vue/no-unused-components -->
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <!-- TODO : Add new img for header <img alt="" src="./assets/logo.png"> -->
+  <div class="row">
+    <AppNavbar></AppNavbar>
+  </div>
+  <div class="row">
+    <div class="col-9 nopadding">
+      <AppMainContent></AppMainContent>
+    </div>
+    <div class="col-3 nopadding">
+      <AppSidebar></AppSidebar>
+    </div>
+  </div>
+  
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AppNavbar from './components/AppNavbar.vue'
+import AppMainContent from './components/AppMainContent.vue'
+import AppSidebar from './components/AppSidebar.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    AppNavbar,
+    AppMainContent,
+    AppSidebar
   }
 }
 </script>
 
 <style>
+.nopadding {
+  padding: 0 !important;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

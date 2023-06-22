@@ -1,0 +1,8 @@
+{
+    "pages": [
+        { "name": "Home", "url": "/" },
+        { "name": "Find by location", "url": "/FindByLocation" },
+        { "name": "All Movies", "url": "/AllMovies" },
+        { "name": "About", "url": "/About" }
+    ]
+}
