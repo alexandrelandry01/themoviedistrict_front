@@ -22,7 +22,7 @@ export default {
         }
     },
     async created() {
-        const listOfMovies = axios.get(BASE_API_URL + BASE_MOVIE_SERVICE).then(response => {
+        const listOfMovies = await axios.get(BASE_API_URL + BASE_MOVIE_SERVICE).then(response => {
             this.movies = response.data;
         }).catch((error) => {
             console.log(error);

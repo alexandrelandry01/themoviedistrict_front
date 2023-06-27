@@ -6,10 +6,6 @@
                 A field is missing
             </div>
             <div>
-                {{ article.title }}
-                {{ article.content }}
-            </div>
-            <div>
                 <form @submit.prevent="addArticle()" method="post" v-show="displayMenu">
                     <div class="form-group">
                         <label for="title">Title</label>
@@ -75,9 +71,6 @@ export default {
         },
         closeAlert() {
             this.formIsValid = true;
-        },
-        publishArticle() {
-
         }
     }
     

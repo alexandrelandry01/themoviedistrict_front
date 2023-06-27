@@ -10,6 +10,9 @@
                     <div>
                         {{ article.content }}
                     </div>
+                    <div>
+                        <router-link :to="'/EditArticle/' + article.id">edit</router-link>
+                    </div>
                     <hr />
                 </li>
             </ul>
@@ -28,15 +31,14 @@
                     </li>
                 </ul>
             </nav>
-        </div>
-            
+        </div>            
     </div>
 </template>
 
 <script>
 
 import axios from 'axios'
-import { BASE_API_URL } from '../shared/config'
+import { BASE_API_URL, BASE_ARTICLE_SERVICE } from '../shared/config'
 
 export default {
     name: 'AppHome',
@@ -51,12 +53,11 @@ export default {
         }
     },
     async beforeCreate() {
-            await axios.get(BASE_API_URL + 'api/articles').then(response => {
+            await axios.get(BASE_API_URL + BASE_ARTICLE_SERVICE).then(response => {
             this.articles = response.data;
             this.amountOfPages = Math.ceil(this.articles.length / this.articlesPerPage);
             this.filteredArticlesPage = this.articles.slice(this.onStartPageNumberIndex, this.articlesPerPage);
         }).catch((error) => {
-            console.log(error);
             throw(error);
         })
     },
