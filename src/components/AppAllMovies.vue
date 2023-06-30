@@ -30,7 +30,7 @@ export default {
         })
     },
     mounted() {
-        axios.get('https://localhost:7226/api/movies').then(response => console.log(response));
+        axios.get(BASE_API_URL + BASE_MOVIE_SERVICE).then(response => console.log(response));
     },
     
     methods: {

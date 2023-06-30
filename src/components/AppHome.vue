@@ -10,12 +10,19 @@
                     <div>
                         {{ article.content }}
                     </div>
+                    <br />
+                    Published on : {{ article.dateTime }}
+                    <br /><br />
                     <div>
-                        <router-link :to="'/EditArticle/' + article.id">edit</router-link>
+                        <router-link :to="'/EditArticle/' + article.id">
+                            <div class="btn btn-primary">Edit</div>
+                        </router-link>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteConfirmation" @click="updateSelectedArticle(article.id)">Delete</button>
                     </div>
                     <hr />
                 </li>
             </ul>
+            <DeleteArticleConfirmationModal :selectedArticleId="this.selectedArticleId" @confirmDeleteArticle="deleteArticle()"></DeleteArticleConfirmationModal>
         </div>
         <div>
             <nav aria-label="...">
@@ -39,9 +46,14 @@
 
 import axios from 'axios'
 import { BASE_API_URL, BASE_ARTICLE_SERVICE } from '../shared/config'
+import DeleteArticleConfirmationModal from '../components/modals/DeleteArticleConfirmationModal.vue'
+import router from '../router'
 
 export default {
     name: 'AppHome',
+    components: {
+        DeleteArticleConfirmationModal
+    },
     data() {
         return {
             articles: [],
@@ -49,7 +61,8 @@ export default {
             amountOfPages: Number,
             articlesPerPage: 5,
             onStartPageNumberIndex: 0,
-            selectedPage: 1
+            selectedPage: 1,
+            selectedArticleId: undefined,
         }
     },
     async beforeCreate() {
@@ -79,7 +92,31 @@ export default {
             let endOfPage = pageNumber * this.articlesPerPage;
             this.filteredArticlesPage = this.articles.slice(beginningOfPage, endOfPage);
             this.selectedPage = pageNumber;
-        }
+        },
+        deleteArticle() {
+            axios.delete(BASE_API_URL + BASE_ARTICLE_SERVICE + "/deletearticle/" + this.selectedArticleId)
+            .then(response => {
+                this.selectedArticleId = undefined;
+                this.reloadArticles();
+                this.updatePage(1);
+            })
+            .catch((error) => {
+                console.log(error);
+                throw(error);
+            });
+        },
+        updateSelectedArticle(id) {
+            this.selectedArticleId = id;
+        },
+        async reloadArticles() {
+            await axios.get(BASE_API_URL + BASE_ARTICLE_SERVICE).then(response => {
+            this.articles = response.data;
+            this.amountOfPages = Math.ceil(this.articles.length / this.articlesPerPage);
+            this.filteredArticlesPage = this.articles.slice(this.onStartPageNumberIndex, this.articlesPerPage);
+        }).catch((error) => {
+            throw(error);
+        });
+        } 
     }
 }
 </script>

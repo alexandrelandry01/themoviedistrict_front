@@ -7,10 +7,7 @@
 <script>
 
 export default {
-    name: 'MainContent',
-    components: {
-    
-    }    
+    name: 'MainContent'
 }
 </script>
 

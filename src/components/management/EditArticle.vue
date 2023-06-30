@@ -50,9 +50,6 @@ export default {
         })
     }, 
     methods: {
-        test() {
-            console.log(this.article.title);
-        },
         editArticle() {
             if (this.formIsComplete) {
                 this.formIsValid = true;
