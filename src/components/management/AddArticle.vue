@@ -16,7 +16,7 @@
                         <textarea rows="10"  v-model="article.content" @focus="closeAlert()"></textarea>
                     </div>
                     <div class="form-group">
-                        <input class="btn btn-primary" type="submit" value="Publier">
+                        <input class="btn btn-primary" type="submit" value="Publish">
                     </div>
                 </form>
                 <div class="alert alert-success" v-show="articleSuccessfullyPublished === true">

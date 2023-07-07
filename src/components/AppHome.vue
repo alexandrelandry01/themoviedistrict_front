@@ -1,7 +1,7 @@
-<template>
+<template>    
     <div>
-        <h1>Page for articles</h1>
         <div>
+            <br />
             <ul>
                 <li v-for="article in filteredArticlesPage" :key="article.id">
                     <div>
@@ -38,7 +38,7 @@
                     </li>
                 </ul>
             </nav>
-        </div>            
+        </div>
     </div>
 </template>
 
@@ -47,7 +47,6 @@
 import axios from 'axios'
 import { BASE_API_URL, BASE_ARTICLE_SERVICE } from '../shared/config'
 import DeleteArticleConfirmationModal from '../components/modals/DeleteArticleConfirmationModal.vue'
-import router from '../router'
 
 export default {
     name: 'AppHome',
@@ -62,7 +61,7 @@ export default {
             articlesPerPage: 5,
             onStartPageNumberIndex: 0,
             selectedPage: 1,
-            selectedArticleId: undefined,
+            selectedArticleId: undefined
         }
     },
     async beforeCreate() {
@@ -116,7 +115,7 @@ export default {
         }).catch((error) => {
             throw(error);
         });
-        } 
+        }
     }
 }
 </script>

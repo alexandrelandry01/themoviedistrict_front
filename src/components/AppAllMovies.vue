@@ -14,8 +14,7 @@
 import axios from 'axios'
 import { BASE_API_URL, BASE_MOVIE_SERVICE } from '@/shared/config'
 
-export default {
-    
+export default {    
     data() {
         return {
             movies: []
@@ -27,12 +26,8 @@ export default {
         }).catch((error) => {
             console.log(error);
             throw(error);
-        })
-    },
-    mounted() {
-        axios.get(BASE_API_URL + BASE_MOVIE_SERVICE).then(response => console.log(response));
-    },
-    
+        });
+    },    
     methods: {
 
     }

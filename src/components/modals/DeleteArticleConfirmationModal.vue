@@ -24,7 +24,6 @@
 <script>
 export default {
     name: 'DeleteArticleConfirmationModal',
-    props: ['selectedArticleId'],
     methods: {
         confirmDeleteArticle() {
             this.$emit('confirmDeleteArticle');
