@@ -3,13 +3,13 @@
         <h1>Add Movie</h1>
         <div class="row form-group">   
             <div class="col d-flex justify-content-center">
-                <input type="text" class="form-control" placeholder="title" v-model="movie.title" id="movieTitle" :disabled="this.movieIsConfirmed">
-                <input type="text" class="form-control" placeholder="year" v-model="movie.yearOfRelease" id="yearOfRelease" maxlength="4" size="4" :disabled="this.movieIsConfirmed">
+                <input type="text" class="form-control" placeholder="title" v-model="movie.title" id="movieTitle" :disabled="this.movieIsConfirmed" @focus="resetMovieForm()">
+                <input type="text" class="form-control" placeholder="year" v-model="movie.yearOfRelease" id="yearOfRelease" maxlength="4" size="4" :disabled="this.movieIsConfirmed" @focus="resetMovieForm()">
             </div>
         </div>
         <div class="row form-group">
             <div class="col d-flex justify-content-center">
-                <input type="text" class="form-control" placeholder="director" v-model="movie.director" id="director" :disabled="this.movieIsConfirmed">
+                <input type="text" class="form-control" placeholder="director" v-model="movie.director" id="director" :disabled="this.movieIsConfirmed" @focus="resetMovieForm()">
                 <div>
                     <label for="isPublished">Is Published</label>
                     <input type="checkbox" name="isPublished" v-model="movie.isPublished" id="isPublished" value="published" :checked="movie.isPublished" :disabled="this.movieIsConfirmed">
@@ -23,9 +23,12 @@
                 </form>
             </div>
         </div>
+        <div class="alert alert-warning" v-show="this.movieSuccessfullyAdded === false">
+                        This movie already exists.
+        </div>
         <div v-if="this.movieIsConfirmed">        
             <h1>Locations for {{ this.createdMovieTitle }} ({{ this.createdMovieYearOfRelease }})</h1>
-            <div v-for="(location, index) in locationsAdded.locations" :key="index">
+            <div v-for="(location, index) in locationsAdded" :key="index">
                 <div class="row form-group">
                     <div class="col d-flex justify-content-center">
                         <span>Location #{{ ++index }}</span>
@@ -80,8 +83,8 @@
                         <div class="col">
                             <label for="country">Country: </label>
                             <div>
-                                <select name="select">
-                                    <option>Select</option>
+                                <select name="select" @change="updateCountry($event, index - 1)">
+                                    <option>Select : </option>
                                     <option v-for="country in countries" :key="country.id">{{ country.name }}</option>
                                 </select>
                             </div>
@@ -97,6 +100,10 @@
                         <input type="submit" value="Publish">
                     </form>
                 </div>
+            </div>
+            <br />
+            <div class="alert alert-success" v-show="this.locationsSuccessfullyAdded === true">
+                        Locations successfully added!
             </div>
         </div>
     </div>
@@ -114,17 +121,17 @@ export default {
                 title: null,
                 yearOfRelease: null,
                 director: null,
-                isPublished: true,
-                locations: []
+                isPublished: true
             },
-            locationsAdded: {
-                locations: []
-            },
+            locationsAdded:[],
             countries: [],
             movieIsConfirmed: false,
             createdMovieId: null,
             createdMovieTitle: null,
-            createdMovieYearOfRelease: null
+            createdMovieYearOfRelease: null,
+            selectedCountry: undefined,
+            movieSuccessfullyAdded: Boolean,
+            locationsSuccessfullyAdded: Boolean
         }
     },
     async created() {
@@ -138,29 +145,31 @@ export default {
     methods: {
         async saveMovie() {
             await axios.post(BASE_API_URL + BASE_MOVIE_SERVICE + "/addmovie", this.movie).then(response => {
-                this.createdMovieId = response.data.id;
-                this.createdMovieTitle = response.data.title;
-                this.createdMovieYearOfRelease = response.data.yearOfRelease;
-                this.movieIsConfirmed = true;
+                if (response.status === 204) {
+                    this.movieSuccessfullyAdded = false;
+                } else {
+                    this.movieSuccessfullyAdded = true;
+                    this.createdMovieId = response.data.id;
+                    this.createdMovieTitle = response.data.title;
+                    this.createdMovieYearOfRelease = response.data.yearOfRelease;
+                    this.movieIsConfirmed = true;
+                }
             }).catch((error) => {
-                console.log(error);
                 throw(error);
             });
         },
         async updateLocations() {
-            console.log("val = " + JSON.stringify(this.locationsAdded));
-            await axios.put(BASE_API_URL + BASE_MOVIE_SERVICE + "/updatelocations/" + this.createdMovieId, this.locationsAdded).then(response => {
-                console.log("succes");
-            }).catch((error) => {
-                console.log(error);
+            await axios.put(BASE_API_URL + BASE_MOVIE_SERVICE + "/updatelocations/" + this.createdMovieId, this.locationsAdded)
+                       .catch((error) => {
                 throw(error);
             });
+            this.locationsSuccessfullyAdded = true;
             setTimeout(function() {
                     router.push({ path: '/'});
                 }, 3000);
         },
         addLocation() {
-            this.locationsAdded.locations.push({
+            this.locationsAdded.push({
                     description: null,
                     address: {
                         houseNumber: null,
@@ -168,10 +177,23 @@ export default {
                         coordinates: null,
                         city: null,
                         territory: null,
-                        country: null
+                        country: { 
+                            id: null,
+                            name: null,
+                            abbreviation: null
+                        }
                     },
                     movie: this.movie
                 })
+        },
+        updateCountry(event, locationIndex) {
+            let countryInfos = this.countries.find(c => c.name === event.target.value);
+            this.locationsAdded[locationIndex].address.country.id = countryInfos.id;
+            this.locationsAdded[locationIndex].address.country.name = countryInfos.name;
+            this.locationsAdded[locationIndex].address.country.abbreviation = countryInfos.abbreviation;
+        },
+        resetMovieForm() {
+            this.movieSuccessfullyAdded = undefined;
         }
     }  
 }
