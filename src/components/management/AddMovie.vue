@@ -39,54 +39,71 @@
                         <textarea id="locationDescription" name="locationDescription" rows="4" cols="40" placeholder="description of location..." v-model="location.description"></textarea>
                     </div>
                 </div>
-                <div class="row form-group">
-                    <div class="col d-flex justify-content-center">
-                        <h5>Address</h5>
+                <div class="col d-flex justify-content-center locationExists">
+                    <div>
+                        <label>Location does not exist</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="isFictional" id="isFictional" v-model="location.isFictional" :checked="location.isFictional">
                     </div>
                 </div>
-                <div id="fieldContainer">
-                    <div class="row form-group address-fields">
-                        <div class="col">
-                            <label for="houseNumber">House Number: </label>
-                            <div>
-                                <input type="text" id="houseNumber" name="houseNumber" v-model="location.address.houseNumber">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <label for="streetName">Street Name: </label>
-                            <div>
-                                <input type="text" id="streetName" name="streetName" v-model="location.address.streetName">
-                            </div>
+                <br />
+                <div v-if="!location.isFictional">
+                    <div class="row form-group">
+                        <div class="col d-flex justify-content-center">
+                            <h5>Address</h5>
                         </div>
                     </div>
-                    <div class="row form-group address-fields">
-                        <div class="col">
-                            <label for="coordinates">Coordinates: </label>
-                            <div>
-                                <input type="text" id="coordinates" name="coordinates" v-model="location.address.coordinates">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <label for="city">City: </label>
-                            <div>
-                                <input type="text" id="city" name="city" v-model="location.address.city">
-                            </div>
+                    <div>
+                        <div class="row form-group">
+                            <label>Address is unknown</label>
+                            <input type="checkbox" name="isUnknown" id="isUnknown" v-model="location.isUnknown" :checked="location.isUnknown">
                         </div>
                     </div>
-                    <div class="row form-group address-fields">
-                        <div class="col">
-                            <label for="territory">Territory: </label>
-                            <div>
-                                <input type="text" id="territory" name="territory" v-model="location.address.territory">
+                    <div id="fieldContainer">
+                        <div class="row form-group address-fields">
+                            <div class="col">
+                                <label for="houseNumber">House Number: </label>
+                                <div>
+                                    <input type="text" id="houseNumber" name="houseNumber" v-model="location.address.houseNumber" :disabled="location.isUnknown">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label for="streetName">Street Name: </label>
+                                <div>
+                                    <input type="text" id="streetName" name="streetName" v-model="location.address.streetName"  :disabled="location.isUnknown">
+                                </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <label for="country">Country: </label>
-                            <div>
-                                <select name="select" @change="updateCountry($event, index - 1)">
-                                    <option>Select : </option>
-                                    <option v-for="country in countries" :key="country.id">{{ country.name }}</option>
-                                </select>
+                        <div class="row form-group address-fields">
+                            <div class="col">
+                                <label for="coordinates">Coordinates: </label>
+                                <div>
+                                    <input type="text" id="coordinates" name="coordinates" v-model="location.address.coordinates"  :disabled="location.isUnknown">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label for="city">City: </label>
+                                <div>
+                                    <input type="text" id="city" name="city" v-model="location.address.city" :disabled="location.isUnknown">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group address-fields">
+                            <div class="col">
+                                <label for="territory">Territory: </label>
+                                <div>
+                                    <input type="text" id="territory" name="territory" v-model="location.address.territory" :disabled="location.isUnknown">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label for="country">Country: </label>
+                                <div>
+                                    <select name="select" @change="updateCountry($event, index - 1)"  :disabled="location.isUnknown">
+                                        <option></option>
+                                        <option v-for="country in countries" :key="country.id">{{ country }}</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -111,8 +128,10 @@
 <script>
 
 import axios from 'axios'
-import { BASE_API_URL, BASE_MOVIE_SERVICE, BASE_COUNTRY_SERVICE } from '@/shared/config'
+import { BASE_API_URL, BASE_MOVIE_SERVICE, BASE_LOCATION_SERVICE } from '@/shared/config'
 import router from '../../router'
+
+const COUNTRIES = require('../../utilityspecs/countries.json');
 
 export default {
     data() {
@@ -121,10 +140,10 @@ export default {
                 title: null,
                 yearOfRelease: null,
                 director: null,
-                isPublished: true
+                isPublished: false
             },
             locationsAdded:[],
-            countries: [],
+            countries: JSON.parse(JSON.stringify(COUNTRIES)),
             movieIsConfirmed: false,
             createdMovieId: null,
             createdMovieTitle: null,
@@ -133,14 +152,6 @@ export default {
             movieSuccessfullyAdded: Boolean,
             locationsSuccessfullyAdded: Boolean
         }
-    },
-    async created() {
-        const listOfCountries = await axios.get(BASE_API_URL + BASE_COUNTRY_SERVICE).then(response => {
-            this.countries = response.data;
-        }).catch((error) => {
-            console.log(error);
-            throw(error);
-        });
     },
     methods: {
         async saveMovie() {
@@ -159,7 +170,7 @@ export default {
             });
         },
         async updateLocations() {
-            await axios.put(BASE_API_URL + BASE_MOVIE_SERVICE + "/updatelocations/" + this.createdMovieId, this.locationsAdded)
+            await axios.post(BASE_API_URL + BASE_LOCATION_SERVICE + "/updatelocations/" + this.createdMovieId, this.locationsAdded)
                        .catch((error) => {
                 throw(error);
             });
@@ -177,28 +188,37 @@ export default {
                         coordinates: null,
                         city: null,
                         territory: null,
-                        country: { 
-                            id: null,
-                            name: null,
-                            abbreviation: null
-                        }
+                        country: null
                     },
-                    movie: this.movie
+                    movie: this.movie,
+                    isFictional: false,
+                    isUnknown: false
                 })
         },
         updateCountry(event, locationIndex) {
-            let countryInfos = this.countries.find(c => c.name === event.target.value);
-            this.locationsAdded[locationIndex].address.country.id = countryInfos.id;
-            this.locationsAdded[locationIndex].address.country.name = countryInfos.name;
-            this.locationsAdded[locationIndex].address.country.abbreviation = countryInfos.abbreviation;
+            this.locationsAdded[locationIndex].address.country = event.target.value;
+        },
+        updateIsUnknown(locationIndex) {
+            let location = this.locationsAdded[locationIndex];
+            console.log("..... " + location.isUnknown);
+            if (this.locationFormIsEmpty(location)) {
+                location.isUnknown = true;
+            } else {
+                location.isUnknown = false;
+            }
         },
         resetMovieForm() {
             this.movieSuccessfullyAdded = undefined;
-        }
+        },
     }  
 }
 </script>
 <style scoped>
+
+.locationExists {
+    justify-content: space-around !important;
+}
+
 .form-group {
     padding: 0 0 10px 0;
 }
