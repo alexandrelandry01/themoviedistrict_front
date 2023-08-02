@@ -12,7 +12,7 @@
 <script>
 
 import axios from 'axios'
-import { BASE_API_URL, BASE_COUNTRY_SERVICE } from '@/shared/config'
+import { BASE_API_URL } from '@/shared/config'
 
 export default {
     
@@ -22,12 +22,7 @@ export default {
         }
     },    
     async created() {
-        const listOfCountries = await axios.get(BASE_API_URL + BASE_COUNTRY_SERVICE).then(response => {
-            this.countries = response.data;
-        }).catch((error) => {
-            console.log(error);
-            throw(error);
-        });
+        
     }
 }
 </script>

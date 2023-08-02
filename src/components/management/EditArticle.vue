@@ -43,7 +43,7 @@ export default {
         }
     },
     async created() {
-        await axios.get(BASE_API_URL + BASE_ARTICLE_SERVICE + "/" + this.articleId, this.article).then(response => {
+        await axios.get(BASE_API_URL + BASE_ARTICLE_SERVICE + "/" + this.articleId).then(response => {
             this.article = response.data;
         }).catch((error) => {
             throw(error);

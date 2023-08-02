@@ -71,7 +71,7 @@
                             <div class="col">
                                 <label for="streetName">Street Name: </label>
                                 <div>
-                                    <input type="text" id="streetName" name="streetName" v-model="location.address.streetName"  :disabled="location.isUnknown">
+                                    <input type="text" id="streetName" name="streetName" v-model="location.address.streetName" :disabled="location.isUnknown">
                                 </div>
                             </div>
                         </div>
@@ -79,7 +79,7 @@
                             <div class="col">
                                 <label for="coordinates">Coordinates: </label>
                                 <div>
-                                    <input type="text" id="coordinates" name="coordinates" v-model="location.address.coordinates"  :disabled="location.isUnknown">
+                                    <input type="text" id="coordinates" name="coordinates" v-model="location.address.coordinates" :disabled="location.isUnknown">
                                 </div>
                             </div>
                             <div class="col">
@@ -99,7 +99,7 @@
                             <div class="col">
                                 <label for="country">Country: </label>
                                 <div>
-                                    <select name="select" @change="updateCountry($event, index - 1)"  :disabled="location.isUnknown">
+                                    <select name="select" v-model="location.address.country" :disabled="location.isUnknown">
                                         <option></option>
                                         <option v-for="country in countries" :key="country.id">{{ country }}</option>
                                     </select>
@@ -170,7 +170,7 @@ export default {
             });
         },
         async updateLocations() {
-            await axios.post(BASE_API_URL + BASE_LOCATION_SERVICE + "/updatelocations/" + this.createdMovieId, this.locationsAdded)
+            await axios.put(BASE_API_URL + BASE_LOCATION_SERVICE + "/updatelocations/" + this.createdMovieId, this.locationsAdded)
                        .catch((error) => {
                 throw(error);
             });
@@ -195,12 +195,8 @@ export default {
                     isUnknown: false
                 })
         },
-        updateCountry(event, locationIndex) {
-            this.locationsAdded[locationIndex].address.country = event.target.value;
-        },
         updateIsUnknown(locationIndex) {
             let location = this.locationsAdded[locationIndex];
-            console.log("..... " + location.isUnknown);
             if (this.locationFormIsEmpty(location)) {
                 location.isUnknown = true;
             } else {

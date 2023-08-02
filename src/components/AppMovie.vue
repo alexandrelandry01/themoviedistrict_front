@@ -1,18 +1,106 @@
 <template>
     <div>
-        List of locations
+        List of locations        
+        <ul>
+            <div class="locationContent">
+                <li v-for="location in movie.locations" :key="location.id">
+                    <div class="locationSq" v-if="!location.isUnknown && !location.isFictional">
+                        <p>{{ location.description }}</p>
+                        <AppLocationMap :locationInstance="location"></AppLocationMap>
+                    </div>
+                    <div class="locationSq" v-if="location.isUnknown">
+                        <p>{{ location.description }}</p>
+                        <div class="unknownBlock">
+                            This location is currently unknown. If you do happen to know its whereabouts, you can help by contacting me at themoviedistrict@gmail.com
+                        </div>
+                    </div>
+                    <div class="locationSq" v-if="location.isFictional">
+                        <p>{{ location.description }}</p>
+                        <div class="fictionalBlock">
+                            This location does not exist in real life. This either means it was a studio backlot, or that it was build on empty grounds at some remote area.
+                        </div>
+                    </div>
+                </li>
+            </div>
+        </ul>     
+        <br />
+        <router-link :to="'/EditMovie/' + movie.id">Edit</router-link>  
     </div>
 </template>
 <script>
 
+import axios from 'axios'
+import { BASE_API_URL, BASE_MOVIE_SERVICE } from '@/shared/config'
+import AppLocationMap from './AppLocationMap.vue'
+import router from '../router'
+
 export default {
+    components: {
+        AppLocationMap
+    },
     data() {
         return {
-            map: null
+            movieId: this.$route.params.id,
+            movie: Object,
         };
+    },
+    async created() {
+        await axios.get(BASE_API_URL + BASE_MOVIE_SERVICE + "/" + this.movieId).then(response => {
+            this.movie = response.data;
+        }).catch((error) => {
+            router.push({ path: '/404' });
+            throw(error);
+        });
     }
 }
 </script>
 <style scoped>
-    
+p {
+    font-weight: bold;
+    max-width: 350px;
+}
+
+.locationContent {
+    background-color: goldenrod;
+    overflow-wrap: anywhere;
+    width: 98%;
+    justify-content: space-evenly;
+    padding: 0 0 20px 0;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 850px) {
+    .locationContent {
+        background-color: goldenrod;
+    overflow-wrap: anywhere;
+    display: block;
+    width: 98%;
+    padding: 0 0 20px 0;
+    height: auto;
+    }
+}
+
+.unknownBlock, .fictionalBlock {
+    width: 350px;
+    height: 350px;
+    border: 1px dashed black;
+}
+
+@media (max-width: 850px) {
+    .unknownBlock, .fictionalBlock {
+        background-color: goldenrod;
+    overflow-wrap: anywhere;
+    display: block;
+    width: 98%;
+    padding: 0 20px 30px 20px;
+    height: auto;
+    }
+}
+
+.locationSq {
+    color: blue;
+    padding: 20px 50px 20px 50px;
+}    
 </style>
