@@ -100,7 +100,6 @@ export default {
                 this.updatePage(1);
             })
             .catch((error) => {
-                console.log(error);
                 throw(error);
             });
         },

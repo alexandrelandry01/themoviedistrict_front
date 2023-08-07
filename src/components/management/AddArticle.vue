@@ -52,7 +52,6 @@ export default {
                 this.formIsValid = true;
                 axios.post(BASE_API_URL + BASE_ARTICLE_SERVICE + "/addarticle", this.article)
                 .catch((error) => {
-                    console.log(error);
                     throw(error);
                 });
                 this.articleSuccessfullyPublished = true;

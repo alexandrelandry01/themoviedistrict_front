@@ -33,10 +33,8 @@ export default {
         }
     },
     async created() {
-        console.log("type is : " + typeof this.countryName);
         if (this.isCanadaUSOrUK(this.countryName)) {
             this.setListOfTerritories(this.countryName);
-            console.log(JSON.stringify(this.listOfTerritories));
             if (this.isNotNullOrEmpty(this.territory) && this.listOfTerritories.includes(this.formatArea(this.territory))) {
                 await axios.get(BASE_API_URL + BASE_MOVIE_SERVICE + "/findbycountry/" + this.countryName + "/" + this.territory).then(
                     response => {
