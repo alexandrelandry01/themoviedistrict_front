@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import AppHome from './components/AppHome.vue'
 import AppAllMovies from './components/AppAllMovies.vue'
 import AppFindByLocation from './components/AppFindByLocation.vue'
+import AppFindByCountry from './components/AppFindByCountry.vue'
+import AppFindByCountryAndTerritory from './components/AppFindByCountryAndTerritory.vue'
 import AppAbout from './components/AppAbout.vue'
 import AddMovie from './components/management/AddMovie.vue'
 import EditMovie from './components/management/EditMovie.vue'
@@ -22,6 +24,8 @@ const router = createRouter({
         { path: '/AddArticle', name: 'AddArticle', component: AddArticle },
         { path: '/EditArticle/:id', name: 'EditArticle', component: EditArticle },
         { path: '/Movies/:id', name: 'Movie', component: AppMovie },
+        { path: '/Movies/FindByCountry/:country/:territory', name: 'FindByCountryAndTerritory', component: AppFindByCountryAndTerritory },
+        { path: '/Movies/FindByCountry/:country', name: 'FindByCountry', component: AppFindByCountry },
 
         { path: '/404', name: 'PageNotFound', component: PageNotFound },
         { path: '/:pathMatch(.*)*', name: 'PageNotFound', component: PageNotFound },

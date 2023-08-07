@@ -1,44 +1,256 @@
-[
-    "Australia",
-    "Austria",
-    "Bahamas",
-    "Belgium",
-    "Canada",
-    "China",
-    "Croatia",
-    "Cuba",
-    "Czech Republic",
-    "Denmark",
-    "Dominican Republic",
-    "Egypt",
-    "France",
-    "Germany",
-    "Gibraltar",
-    "Greece",
-    "Iceland",
-    "India",
-    "Iran",
-    "Iraq",
-    "Ireland",
-    "Israel",
-    "Italy",
-    "Jamaica",
-    "Japan",
-    "Mexico",
-    "Monaco",
-    "Morocco",
-    "Netherlands",
-    "New Zealand",
-    "Norway",
-    "Portugal",
-    "Romania",
-    "Russia",
-    "Spain",
-    "Sweden",
-    "Switzerland",
-    "Thailand",
-    "Tunisia",
-    "Turkey",
-    "United Kingdom",
-    "United States"
-]
+{
+    "countries": {
+        "Australia": {
+            "nameWithCapital": "Australia",
+            "name": "australia",
+            "image": "../assets/flags/australia.png",
+            "code": "AU"
+        },
+        "Austria": {
+            "nameWithCapital": "Austria",
+            "name": "austria",
+            "image": "",
+            "code": "AT"
+        },
+        "Bahamas": {
+            "nameWithCapital": "Bahamas",
+            "name": "bahamas",
+            "image": "",
+            "code": "BS"
+        },
+        "Belgium": {
+            "nameWithCapital": "Belgium",
+            "name": "belgium",
+            "image": "",
+            "code": "BE"
+        },
+        "Canada": {
+            "nameWithCapital": "Canada",
+            "name": "canada",
+            "image": "",
+            "code": "CA"
+        },
+        "China": {
+            "nameWithCapital": "China",
+            "name": "china",
+            "image": "",
+            "code": "CN"
+        },
+        "Croatia": {
+            "nameWithCapital": "Croatia",
+            "name": "croatia",
+            "image": "",
+            "code": "HR"
+        },
+        "Cuba": {
+            "nameWithCapital": "Cuba",
+            "name": "cuba",
+            "image": "",
+            "code": "CU"
+        },
+        "Czech Republic": {
+            "nameWithCapital": "Czech Republic",
+            "name": "czech republic",
+            "image": "",
+            "code": "CZ"
+        },
+        "Denmark": {
+            "nameWithCapital": "Denmark",
+            "name": "denmark",
+            "image": "",
+            "code": "DK"
+        },
+        "Dominican Republic": {
+            "nameWithCapital": "Dominican Republic",
+            "name": "dominican republic",
+            "image": "",
+            "code": "DO"
+        },
+        "Egypt": {
+            "nameWithCapital": "Egypt",
+            "name": "egypt",
+            "image": "",
+            "code": "EG"
+        },
+        "France": {
+            "nameWithCapital": "France",
+            "name": "france",
+            "image": "",
+            "code": "FR"
+        },
+        "Germany": {
+            "nameWithCapital": "Germany",
+            "name": "germany",
+            "image": "",
+            "code": "DE"
+        },
+        "Gibraltar": {
+            "nameWithCapital": "Gibraltar",
+            "name": "gibraltar",
+            "image": "",
+            "code": "GI"
+        },
+        "Greece": {
+            "nameWithCapital": "Greece",
+            "name": "greece",
+            "image": "",
+            "code": "GR"
+        },
+        "Iceland": {
+            "nameWithCapital": "Iceland",
+            "name": "iceland",
+            "image": "",
+            "code": "IS"
+        },
+        "India": {
+            "nameWithCapital": "India",
+            "name": "india",
+            "image": "",
+            "code": "IN"
+        },
+        "Iran": {
+            "nameWithCapital": "Iran",
+            "name": "iran",
+            "image": "",
+            "code": "IR"
+        },
+        "Iraq": {
+            "nameWithCapital": "Iraq",
+            "name": "iraq",
+            "image": "",
+            "code": "IQ"
+        },
+        "Ireland": {
+            "nameWithCapital": "Ireland",
+            "name": "Ireland",
+            "image": "",
+            "code": "IE"
+        },
+        "Israel": {
+            "nameWithCapital": "Israel",
+            "name": "israel",
+            "image": "",
+            "code": "IL"
+        },
+        "Italy": {
+            "nameWithCapital": "Italy",
+            "name": "italy",
+            "image": "",
+            "code": "IT"
+        },
+        "Jamaica": {
+            "nameWithCapital": "Jamaica",
+            "name": "jamaica",
+            "image": "",
+            "code": "JM"
+        },
+        "Japan": {
+            "nameWithCapital": "Japan",
+            "name": "japan",
+            "image": "",
+            "code": "JP"
+        },
+        "Mexico": {
+            "nameWithCapital": "Mexico",
+            "name": "mexico",
+            "image": "",
+            "code": "MX"
+        },
+        "Monaco": {
+            "nameWithCapital": "Monaco",
+            "name": "monaco",
+            "image": "",
+            "code": "MC"
+        },
+        "Morocco": {
+            "nameWithCapital": "Morocco",
+            "name": "morocco",
+            "image": "",
+            "code": "MA"
+        },
+        "Netherlands": {
+            "nameWithCapital": "Netherlands",
+            "name": "netherlands",
+            "image": "",
+            "code": "NL"
+        },
+        "New Zealand": {
+            "nameWithCapital": "New Zealand",
+            "name": "new zealand",
+            "image": "",
+            "code": "NZ"
+        },
+        "Norway": {
+            "nameWithCapital": "Norway",
+            "name": "norway",
+            "image": "",
+            "code": "NO"
+        },
+        "Portugal": {
+            "nameWithCapital": "Portugal",
+            "name": "portugal",
+            "image": "",
+            "code": "PT"
+        },
+        "Romania": {
+            "nameWithCapital": "Romania",
+            "name": "romania",
+            "image": "",
+            "code": "RO"
+        },
+        "Russia": {
+            "nameWithCapital": "Russia",
+            "name": "russia",
+            "image": "",
+            "code": "RU"
+        },
+        "Spain": {
+            "nameWithCapital": "Spain",
+            "name": "spain",
+            "image": "",
+            "code": "ES"
+        },
+        "Sweden": {
+            "nameWithCapital": "Sweden",
+            "name": "sweden",
+            "image": "",
+            "code": "SE"
+        },
+        "Switzerland": {
+            "nameWithCapital": "Switzerland",
+            "name": "switzerland",
+            "image": "",
+            "code": "CH"
+        },
+        "Thailand": {
+            "nameWithCapital": "Thailand",
+            "name": "thailand",
+            "image": "",
+            "code": "TH"
+        },
+        "Tunisia": {
+            "nameWithCapital": "Tunisia",
+            "name": "tunisia",
+            "image": "",
+            "code": "TN"
+        },
+        "Turkey": {
+            "nameWithCapital": "Turkey",
+            "name": "turkey",
+            "image": "",
+            "code": "TR"
+        },
+        "United Kingdom": {
+            "nameWithCapital": "United Kingdom",
+            "name": "united kingdom",
+            "image": "",
+            "code": "UK"
+        },
+        "United States": {
+            "nameWithCapital": "United States",
+            "name": "united states",
+            "image": "",
+            "code": "US"
+        }
+    }
+}

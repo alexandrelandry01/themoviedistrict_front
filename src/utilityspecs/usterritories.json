@@ -1,0 +1,200 @@
+{
+    "territories": {
+        "Alabama": {
+            "nameWithCapital": "Alabama",
+            "name": "alabama"
+        },
+        "Arkansas": {
+            "nameWithCapital": "Arkansas",
+            "name": "arkansas"
+        },
+        "Arizona": {
+            "nameWithCapital": "Arizona",
+            "name": "arizona"
+        },
+        "California": {
+            "nameWithCapital": "California",
+            "name": "california"
+        },
+        "Colorado": {
+            "nameWithCapital": "Colorado",
+            "name": "colorado"
+        },
+        "Connecticut": {
+            "nameWithCapital": "Connecticut",
+            "name": "connecticut"
+        },
+        "Delaware": {
+            "nameWithCapital": "Delaware",
+            "name": "delaware"
+        },
+        "Georgia": {
+            "nameWithCapital": "Georgia",
+            "name": "georgia"
+        },
+        "Hawaii": {
+            "nameWithCapital": "Hawaii",
+            "name": "hawaii"
+        },
+        "Illinois": {
+            "nameWithCapital": "Illinois",
+            "name": "illinois"
+        },
+        "Indiana": {
+            "nameWithCapital": "Indiana",
+            "name": "indiana"
+        },
+        "Iowa": {
+            "nameWithCapital": "Iowa",
+            "name": "iowa"
+        },
+        "Kansas": {
+            "nameWithCapital": "Kansas",
+            "name": "kansas"
+        },
+        "Kentucky": {
+            "nameWithCapital": "Kentucky",
+            "name": "kentucky"
+        },
+        "Louisiana": {
+            "nameWithCapital": "Louisiana",
+            "name": "louisiana"
+        },
+        "Massachusetts": {
+            "nameWithCapital": "Massachusetts",
+            "name": "massachusetts"
+        },
+        "Maine": {
+            "nameWithCapital": "Maine",
+            "name": "maine"
+        },
+        "Maryland": {
+            "nameWithCapital": "Maryland",
+            "name": "maryland"
+        },
+        "Michigan": {
+            "nameWithCapital": "Michigan",
+            "name": "michigan"
+        },
+        "Minnesota": {
+            "nameWithCapital": "Minnesota",
+            "name": "minnesota"
+        },
+        "Mississippi": {
+            "nameWithCapital": "Mississippi",
+            "name": "mississippi"
+        },
+        "Missouri": {
+            "nameWithCapital": "Missouri",
+            "name": "missouri"
+        },
+        "Montana": {
+            "nameWithCapital": "Montana",
+            "name": "montana"
+        },
+        "Nebraska": {
+            "nameWithCapital": "Nebraska",
+            "name": "nebraska"
+        },
+        "New Hampshire": {
+            "nameWithCapital": "New Hampshire",
+            "name": "new hampshire"
+        },
+        "New Jersey": {
+            "nameWithCapital": "New Jersey",
+            "name": "new jersey"
+        },
+        "New Mexico": {
+            "nameWithCapital": "New Mexico",
+            "name": "new mexico"
+        },
+        "New York": {
+            "nameWithCapital": "New York",
+            "name": "new york"
+        },
+        "Nevada": {
+            "nameWithCapital": "Nevada",
+            "name": "nevada"
+        },
+        "North Carolina": {
+            "nameWithCapital": "North Carolina",
+            "name": "north carolina"
+        },
+        "Ohio": {
+            "nameWithCapital": "Ohio",
+            "name": "ohio"
+        },
+        "Oklahoma": {
+            "nameWithCapital": "Oklahoma",
+            "name": "oklahoma"
+        },
+        "Oregon": {
+            "nameWithCapital": "Oregon",
+            "name": "oregon"
+        },
+        "Pennsylvania": {
+            "nameWithCapital": "Pennsylvania",
+            "name": "pennsylvania"
+        },
+        "Porto Rico": {
+            "nameWithCapital": "Porto Rico",
+            "name": "porto rico"
+        },
+        "Rhode Island": {
+            "nameWithCapital": "Rhode Island",
+            "name": "rhode island"
+        },
+        "South Carolina": {
+            "nameWithCapital": "South Carolina",
+            "name": "south carolina"
+        },
+        "South Dakota": {
+            "nameWithCapital": "South Dakota",
+            "name": "south dakota"
+        },
+        "Tennessee": {
+            "nameWithCapital": "Tennessee",
+            "name": "tennessee"
+        },
+        "Texas": {
+            "nameWithCapital": "Texas",
+            "name": "texas"
+        },
+        "Utah": {
+            "nameWithCapital": "Utah",
+            "name": "utah"
+        },
+        "Virginia": {
+            "nameWithCapital": "Virginia",
+            "name": "virginia"
+        },
+        "Vermont": {
+            "nameWithCapital": "Vermont",
+            "name": "vermont"
+        },
+        "Virgin Islands": {
+            "nameWithCapital": "Virgin Islands",
+            "name": "virgin islands"
+        },
+        "Washington": {
+            "nameWithCapital": "Washington",
+            "name": "washington"
+        },
+        "Washington D.C.": {
+            "nameWithCapital": "Washington D.C.",
+            "name": "washington d.c."
+        },
+        "West Virginia": {
+            "nameWithCapital": "West Virginia",
+            "name": "west virginia"
+        },
+        "Wisconsin": {
+            "nameWithCapital": "Wisconsin",
+            "name": "wisconsin"
+        },
+        "Wyoming": {
+            "nameWithCapital": "Wyoming",
+            "name": "wyoming"
+        }
+    }
+}

@@ -31,7 +31,7 @@
     },
     data() {
       return {
-        zoom: 14,
+        zoom: 16,
         markers: [
             {
                 id: 1,
@@ -42,7 +42,7 @@
     },
     methods: {
         formatCoordinates(stringValue) {
-            if (stringValue !== null && stringValue !== '' && stringValue !== 'undefined') {
+            if (stringValue !== null && stringValue !== '' && (typeof stringValue !== 'undefined')) {
                 return stringValue.split(",").map(Number);
             }
         }

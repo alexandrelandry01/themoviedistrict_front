@@ -1,0 +1,28 @@
+{
+    "territories": {
+        "Alberta": {
+            "nameWithCapital": "Alberta",
+            "name": "alberta"
+        },
+        "British Columbia": {
+            "nameWithCapital": "British Columbia",
+            "name": "british columbia"
+        },
+        "Nova Scotia": {
+            "nameWithCapital": "Nova Scotia",
+            "name": "nova scotia"
+        },
+        "Nunavut": {
+            "nameWithCapital": "Nunavut",
+            "name": "nunavut"
+        },
+        "Ontario": {
+            "nameWithCapital": "Ontario",
+            "name": "ontario"
+        },
+        "Quebec": {
+            "nameWithCapital": "Quebec",
+            "name": "quebec"
+        }
+    }
+}

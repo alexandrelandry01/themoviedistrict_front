@@ -101,7 +101,7 @@
                                 <div>
                                     <select name="select" v-model="location.address.country" :disabled="location.isUnknown">
                                         <option></option>
-                                        <option v-for="country in countries" :key="country.id">{{ country }}</option>
+                                        <option v-for="country in countries['countries']" :key="country.id">{{ country.nameWithCapital }}</option>
                                     </select>
                                 </div>
                             </div>

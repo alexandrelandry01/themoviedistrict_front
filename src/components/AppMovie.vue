@@ -1,6 +1,6 @@
 <template>
     <div>
-        List of locations        
+        <h1>Filming locations for {{ this.movie.title }} ({{ this.movie.yearOfRelease }})</h1>
         <ul>
             <div class="locationContent">
                 <li v-for="location in movie.locations" :key="location.id">
@@ -61,7 +61,6 @@ p {
 }
 
 .locationContent {
-    background-color: goldenrod;
     overflow-wrap: anywhere;
     width: 98%;
     justify-content: space-evenly;
@@ -73,12 +72,11 @@ p {
 
 @media (max-width: 850px) {
     .locationContent {
-        background-color: goldenrod;
-    overflow-wrap: anywhere;
-    display: block;
-    width: 98%;
-    padding: 0 0 20px 0;
-    height: auto;
+        overflow-wrap: anywhere;
+        display: block;
+        width: 98%;
+        padding: 0 0 20px 0;
+        height: auto;
     }
 }
 
@@ -86,21 +84,20 @@ p {
     width: 350px;
     height: 350px;
     border: 1px dashed black;
+    background-color: whitesmoke;
 }
 
 @media (max-width: 850px) {
     .unknownBlock, .fictionalBlock {
-        background-color: goldenrod;
-    overflow-wrap: anywhere;
-    display: block;
-    width: 98%;
-    padding: 0 20px 30px 20px;
-    height: auto;
+        overflow-wrap: anywhere;
+        display: block;
+        width: 98%;
+        padding: 0 20px 30px 20px;
+        height: auto;
     }
 }
 
 .locationSq {
-    color: blue;
     padding: 20px 50px 20px 50px;
 }    
 </style>
