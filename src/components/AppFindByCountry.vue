@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>{{ this.formatArea(this.countryName) }}</h1>
-        <img :src="require('../assets/flags/' + this.countryName + '.png')"/>
+        <img :src="require('../assets/flags/' + this.trimArea(this.countryName) + '.png')"/>
         <br />
         <br />
         <ul v-if="!this.isCanadaUSOrUK(this.countryName)">
@@ -60,6 +60,13 @@ export default {
                        split.at(1).charAt(0).toUpperCase() + split.at(1).slice(1);
             } else {
                 return country.charAt(0).toUpperCase() + country.slice(1);
+            }
+        },
+        trimArea(country) {
+            if (country.indexOf(EMPTY_SPACE) !== -1) {
+                return country.replace(/\s/g, '');
+            } else {
+                return country;
             }
         },
         isCanadaUSOrUK(country) {
