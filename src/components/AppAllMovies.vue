@@ -26,11 +26,7 @@ export default {
         }).catch((error) => {
             throw(error);
         });
-    },    
-    methods: {
-
     }
-    
 }
 </script>
 

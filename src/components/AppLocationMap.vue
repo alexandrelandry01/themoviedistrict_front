@@ -7,7 +7,8 @@
           name="OpenStreetMap"
         ></l-tile-layer>
         <l-marker :key="locationInstance.id" :lat-lng="formatCoordinates(locationInstance.address.coordinates)">
-            <l-popup>{{ (locationInstance.address.houseNumber === null ? '' : locationInstance.address.houseNumber) }} {{ locationInstance.address.streetName + ', ' +
+            <l-popup>{{ (locationInstance.address.houseNumber === null ? '' : locationInstance.address.houseNumber) }} 
+                     {{ (locationInstance.address.streetName === null ? '' : locationInstance.address.houseNumber + ', ') +
                         locationInstance.address.city + ', ' + locationInstance.address.territory + ', ' + 
                         locationInstance.address.country }}</l-popup>
         </l-marker>
@@ -32,12 +33,6 @@
     data() {
       return {
         zoom: 16,
-        markers: [
-            {
-                id: 1,
-                coords: [32.25434574584535, -101.47147141204873]
-            }
-        ]
       };
     },
     methods: {
