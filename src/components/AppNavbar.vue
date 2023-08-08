@@ -40,7 +40,7 @@ export default {
             }
         },
         queryStringIsValid(string) {
-            return (typeof string !== 'undefined') && string !== '' && string !== null && string.trim() !== '';
+            return string.trim() !== '';
         }
     }
 }
