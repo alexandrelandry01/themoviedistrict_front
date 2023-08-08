@@ -48,66 +48,76 @@
                     </div>
                 </div>
                 <br />
-                <div v-if="!location.isFictional">
-                    <div class="row form-group">
-                        <div class="col d-flex justify-content-center">
-                            <h5>Address</h5>
-                        </div>
-                    </div>
-                    <div>
+                <div>
+                    <div v-if="!location.isFictional">
                         <div class="row form-group">
-                            <label>Address is unknown</label>
-                            <input type="checkbox" name="isUnknown" id="isUnknown" v-model="location.isUnknown" :checked="location.isUnknown">
+                            <div class="col d-flex justify-content-center">
+                                <h5>Address</h5>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row form-group">
+                                <label>Address is unknown</label>
+                                <input type="checkbox" name="isUnknown" id="isUnknown" v-model="location.isUnknown" :checked="location.isUnknown">
+                            </div>
+                        </div>
+                        <div id="fieldContainer">
+                            <div class="row form-group address-fields">
+                                <div class="col">
+                                    <label for="houseNumber">House Number: </label>
+                                    <div>
+                                        <input type="text" id="houseNumber" name="houseNumber" v-model="location.address.houseNumber" :disabled="location.isUnknown">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <label for="streetName">Street Name: </label>
+                                    <div>
+                                        <input type="text" id="streetName" name="streetName" v-model="location.address.streetName" :disabled="location.isUnknown">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group address-fields">
+                                <div class="col">
+                                    <label for="coordinates">Coordinates: </label>
+                                    <div>
+                                        <input type="text" id="coordinates" name="coordinates" v-model="location.address.coordinates" :disabled="location.isUnknown">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <label for="city">City: </label>
+                                    <div>
+                                        <input type="text" id="city" name="city" v-model="location.address.city" :disabled="location.isUnknown">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group address-fields">
+                                <div class="col">
+                                    <label for="territory">Territory: </label>
+                                    <div>
+                                        <input type="text" id="territory" name="territory" v-model="location.address.territory" :disabled="location.isUnknown">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <label for="country">Country: </label>
+                                    <div>
+                                        <select name="select" v-model="location.address.country" :disabled="location.isUnknown">
+                                            <option></option>
+                                            <option v-for="country in countries['countries']" :key="country.id">{{ country.nameWithCapital }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
                         </div>
                     </div>
-                    <div id="fieldContainer">
-                        <div class="row form-group address-fields">
-                            <div class="col">
-                                <label for="houseNumber">House Number: </label>
-                                <div>
-                                    <input type="text" id="houseNumber" name="houseNumber" v-model="location.address.houseNumber" :disabled="location.isUnknown">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <label for="streetName">Street Name: </label>
-                                <div>
-                                    <input type="text" id="streetName" name="streetName" v-model="location.address.streetName" :disabled="location.isUnknown">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row form-group address-fields">
-                            <div class="col">
-                                <label for="coordinates">Coordinates: </label>
-                                <div>
-                                    <input type="text" id="coordinates" name="coordinates" v-model="location.address.coordinates" :disabled="location.isUnknown">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <label for="city">City: </label>
-                                <div>
-                                    <input type="text" id="city" name="city" v-model="location.address.city" :disabled="location.isUnknown">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row form-group address-fields">
-                            <div class="col">
-                                <label for="territory">Territory: </label>
-                                <div>
-                                    <input type="text" id="territory" name="territory" v-model="location.address.territory" :disabled="location.isUnknown">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <label for="country">Country: </label>
-                                <div>
-                                    <select name="select" v-model="location.address.country" :disabled="location.isUnknown">
-                                        <option></option>
-                                        <option v-for="country in countries['countries']" :key="country.id">{{ country.nameWithCapital }}</option>
-                                    </select>
-                                </div>
-                            </div>
+                    <div class="row form-group">
+                        <label for="note">Note (if needed)</label>
+                        <div class="col d-flex justify-content-center">
+                            <textarea id="locationNote" name="locationNote" rows="2" cols="40" placeholder="note" v-model="location.note"></textarea>
                         </div>
                     </div>
                 </div>
+                
                 <hr />
             </div>
             <div class="row form-group">

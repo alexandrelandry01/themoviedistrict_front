@@ -9,9 +9,9 @@
                 </ul>
             </div>
             <div class="col-6">
-                <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" v-model="this.searchValue">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" @click="searchString(this.searchValue)">Search</button>
+                <form @submit="this.searchString(this.searchParam)" class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="find a movie.." aria-label="Search" v-model="this.searchParam">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" :disabled="this.searchParam.length < 3">Search</button>
                 </form>
             </div>
         </div>
@@ -21,6 +21,8 @@
 
 <script>
 
+import router from '../router'
+
 const LINKS = require('../utilityspecs/navbarValues.json');
 
 export default {
@@ -28,12 +30,17 @@ export default {
     data() {
         return {
            appNavbar: JSON.parse(JSON.stringify(LINKS)),
-           searchValue: String
+           searchParam: ''
         }
     },
     methods: {
         searchString(string) {
-
+            if (this.queryStringIsValid(string)) {
+                router.push({ path: '/Movies/Search/' + this.searchParam });
+            }
+        },
+        queryStringIsValid(string) {
+            return (typeof string !== 'undefined') && string !== '' && string !== null && string.trim() !== '';
         }
     }
 }

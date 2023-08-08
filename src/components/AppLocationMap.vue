@@ -8,7 +8,7 @@
         ></l-tile-layer>
         <l-marker :key="locationInstance.id" :lat-lng="formatCoordinates(locationInstance.address.coordinates)">
             <l-popup>{{ (locationInstance.address.houseNumber === null ? '' : locationInstance.address.houseNumber) }} 
-                     {{ (locationInstance.address.streetName === null ? '' : locationInstance.address.houseNumber + ', ') +
+                     {{ (locationInstance.address.streetName === null ? '' : locationInstance.address.streetName + ', ') +
                         locationInstance.address.city + ', ' + locationInstance.address.territory + ', ' + 
                         locationInstance.address.country }}</l-popup>
         </l-marker>

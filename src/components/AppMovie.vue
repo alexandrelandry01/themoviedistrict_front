@@ -3,23 +3,26 @@
         <h1>Filming locations for {{ this.movie.title }} ({{ this.movie.yearOfRelease }})</h1>
         <ul>
             <div class="locationContent">
-                <li v-for="location in movie.locations" :key="location.id">
+                <li v-for="location in movie.locations" :key="location.id" style="border: 1px solid black">
                     <div class="locationSq" v-if="!location.isUnknown && !location.isFictional">
                         <p>{{ location.description }}</p>
                         <AppLocationMap :locationInstance="location"></AppLocationMap>
+                        <p class="tidbit">{{ location.note === null ? '' : 'Tidbit : ' + location.note }}</p>
                     </div>
                     <div class="locationSq" v-if="location.isUnknown">
                         <p>{{ location.description }}</p>
                         <div class="unknownBlock">
                             This location is currently unknown. If you do happen to know its whereabouts, you can help by contacting me at themoviedistrict@gmail.com
                         </div>
+                        <p class="tidbit">{{ location.note === null ? '' : 'Tidbit : ' + location.note }}</p>
                     </div>
                     <div class="locationSq" v-if="location.isFictional">
                         <p>{{ location.description }}</p>
                         <div class="fictionalBlock">
                             This location does not exist in real life. This either means it was a studio backlot, or that it was build on empty grounds at some remote area.
                         </div>
-                    </div>
+                        <p class="tidbit">{{ location.note === null ? '' : 'Tidbit : ' + location.note }}</p>
+                    </div>           
                 </li>
             </div>
         </ul>     
@@ -68,6 +71,10 @@ p {
     height: auto;
     display: flex;
     flex-wrap: wrap;
+}
+
+.tidbit {
+    font-style: italic;
 }
 
 @media (max-width: 850px) {

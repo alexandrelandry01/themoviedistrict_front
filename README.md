@@ -1,4 +1,6 @@
 # themoviedistrict
+# TheMovieDistrict was born in another form in 2013
+# Its purpose is to document filming locations from movies
 
 ## Project setup
 ```
