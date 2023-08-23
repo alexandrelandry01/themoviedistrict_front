@@ -42,6 +42,11 @@ export default {
             displayMenu: true
         }
     },
+    beforeCreate() {
+        if (this.$store.state.isAdmin === null || this.$store.state.isAdmin === false) {
+            router.push({ path: '/404'});
+        }
+    },
     async created() {
         await axios.get(BASE_API_URL + BASE_ARTICLE_SERVICE + "/" + this.articleId).then(response => {
             this.article = response.data;
@@ -52,16 +57,21 @@ export default {
     methods: {
         editArticle() {
             if (this.formIsComplete) {
-                this.formIsValid = true;
-                axios.put(BASE_API_URL + BASE_ARTICLE_SERVICE + "/updatearticle/" + this.articleId, this.article)
+                axios.put(BASE_API_URL + BASE_ARTICLE_SERVICE + "/updatearticle/" + this.articleId, this.article, {
+                    headers: {
+                        "Authorization": `Bearer ${this.$store.state.token}`
+                    }
+                }).then(() => {
+                    this.formIsValid = true;
+                    this.articleSuccessfullyEdited = true;
+                    this.displayMenu = false;
+                    setTimeout(function () {
+                        router.push({ path: '/' });
+                    }, 3000);
+                })
                 .catch((error) => {
                     throw(error);
                 });
-                this.articleSuccessfullyEdited = true;
-                this.displayMenu = false;
-                setTimeout(function () {
-                    router.push({ path: '/' });
-                }, 3000);
             }
         },
         formIsComplete() {

@@ -13,7 +13,7 @@
                     <br />
                     Published on : {{ article.dateTime }}
                     <br /><br />
-                    <div>
+                    <div v-if="this.$store.state.isAdmin === true">
                         <router-link :to="'/EditArticle/' + article.id">
                             <div class="btn btn-primary">Edit</div>
                         </router-link>

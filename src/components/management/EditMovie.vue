@@ -152,6 +152,11 @@ export default {
             locationsSuccessfullyUpdated: Boolean
         }
     },
+    beforeCreate() {
+        if (this.$store.state.isAdmin === null || this.$store.state.isAdmin === false) {
+            router.push({ path: '/404'});
+        }
+    },
     async created() {
         await axios.get(BASE_API_URL + BASE_MOVIE_SERVICE + "/" + this.movieId).then(response => {
             this.movie = response.data;
@@ -169,8 +174,28 @@ export default {
                 this.movieSaved = false;
             }, 3000);
         },
+        addLocation() {
+            this.movie.locations.push({
+                    description: null,
+                    address: {
+                        houseNumber: null,
+                        streetName: null,
+                        coordinates: null,
+                        city: null,
+                        territory: null,
+                        country: null
+                    },
+                    movie: JSON.parse(JSON.stringify(this.movie)),
+                    isFictional: false,
+                    isUnknown: false
+                })
+        },
         async updateLocations() {
-            await axios.put(BASE_API_URL + BASE_LOCATION_SERVICE + "/updatelocations/" + this.movieId, this.movie.locations).catch((error) => {
+            await axios.put(BASE_API_URL + BASE_LOCATION_SERVICE + "/updatelocations/" + this.movieId, this.movie.locations, {
+                headers: {
+                    "Authorization": `Bearer ${this.$store.state.token}`
+                }
+            }).catch((error) => {
                 throw(error);
             });
             this.locationsSuccessfullyUpdated = true;
@@ -182,8 +207,8 @@ export default {
     
 }
 </script>
-<style scoped>
 
+<style scoped>
 .locationExists {
     justify-content: space-around !important;
 }
@@ -212,6 +237,5 @@ form {
 .address-fields {
     display: inline-flex;
 
-}
-    
+}    
 </style>

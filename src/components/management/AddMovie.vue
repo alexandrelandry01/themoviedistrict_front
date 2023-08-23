@@ -163,9 +163,18 @@ export default {
             locationsSuccessfullyAdded: Boolean
         }
     },
+    beforeCreate() {
+        if (this.$store.state.isAdmin === null || this.$store.state.isAdmin === false) {
+            router.push({ path: '/404'});
+        }
+    },
     methods: {
         async saveMovie() {
-            await axios.post(BASE_API_URL + BASE_MOVIE_SERVICE + "/addmovie", this.movie).then(response => {
+            await axios.post(BASE_API_URL + BASE_MOVIE_SERVICE + "/addmovie", this.movie, {
+                headers: {
+                    "Authorization": `Bearer ${this.$store.state.token}`
+                }
+            }).then(response => {
                 if (response.status === 204) {
                     this.movieSuccessfullyAdded = false;
                 } else {
@@ -187,7 +196,7 @@ export default {
             this.locationsSuccessfullyAdded = true;
             setTimeout(function() {
                     router.push({ path: '/'});
-                }, 3000);
+            }, 3000);
         },
         addLocation() {
             this.locationsAdded.push({
@@ -216,7 +225,7 @@ export default {
         resetMovieForm() {
             this.movieSuccessfullyAdded = undefined;
         },
-    }  
+    }
 }
 </script>
 <style scoped>

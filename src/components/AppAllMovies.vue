@@ -3,7 +3,9 @@
         <h1>Movies</h1>
         <ul>
             <li v-for="movie in movies" :key="movie.id">
-                <router-link :to="'/Movies/' + movie.id">{{ movie.title + ' ' + '(' + movie.yearOfRelease + ')'}}</router-link>
+                <div v-if="movie.isPublished">
+                    <router-link :to="'/Movies/' + movie.id">{{ movie.title + ' ' + '(' + movie.yearOfRelease + ')'}}</router-link>
+                </div>
             </li>
         </ul>        
     </div>

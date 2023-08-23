@@ -46,11 +46,20 @@ export default {
             }
         }
     },
+    beforeCreate() {
+        if (this.$store.state.isAdmin === null || this.$store.state.isAdmin === false) {
+            router.push({ path: '/404'});
+        }
+    },
     methods: {
         addArticle() {
             if (this.formIsComplete()) {
                 this.formIsValid = true;
-                axios.post(BASE_API_URL + BASE_ARTICLE_SERVICE + "/addarticle", this.article)
+                axios.post(BASE_API_URL + BASE_ARTICLE_SERVICE + "/addarticle", this.article, {
+                    headers: {
+                        "Authorization": `Bearer ${this.$store.state.token}`
+                    }
+                })
                 .catch((error) => {
                     throw(error);
                 });

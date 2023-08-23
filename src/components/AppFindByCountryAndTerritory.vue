@@ -5,7 +5,9 @@
         <br />
         <ul>
             <li v-for="movie in movies" :key="movie.id">
-                <router-link :to="'/movies/' + movie.id">{{ movie.title + ' ' + '(' + movie.yearOfRelease + ')'}}</router-link>
+                <div v-if="movie.isPublished">
+                    <router-link :to="'/movies/' + movie.id">{{ movie.title + ' ' + '(' + movie.yearOfRelease + ')'}}</router-link>
+                </div>
             </li>
         </ul>
     </div>
@@ -77,8 +79,7 @@ export default {
                 default: 
             }
         }
-    }
-    
+    }    
 }
 </script>
 <style>

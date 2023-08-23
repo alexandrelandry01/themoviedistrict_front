@@ -27,7 +27,9 @@
             </div>
         </ul>     
         <br />
-        <router-link :to="'/EditMovie/' + movie.id">Edit</router-link>  
+        <div v-if="this.$store.state.isAdmin === true">
+            <router-link :to="'/EditMovie/' + movie.id">Edit</router-link>
+        </div>  
     </div>
 </template>
 <script>

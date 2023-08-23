@@ -7,9 +7,11 @@
         <div v-if="this.searchHasYieldedResults">
             <ul>
                 <li v-for="movie in moviesReturned" :key="movie.id">
-                    <router-link :to="'/Movies/' + movie.id">{{ movie.title + ' ' + '(' + movie.yearOfRelease + ')'}}</router-link>
+                    <div v-if="movie.isPublished">
+                        <router-link :to="'/Movies/' + movie.id">{{ movie.title + ' ' + '(' + movie.yearOfRelease + ')'}}</router-link>
+                    </div>
                 </li>
-            </ul>  
+            </ul>
         </div>
     </div>
 </template>
@@ -41,6 +43,7 @@ export default {
     
 }
 </script>
+
 <style>
     
 </style>

@@ -12,20 +12,28 @@
       <AppSidebar></AppSidebar>
     </div>
   </div>
-  
+  <div class="row">
+    <div class="col-9">
+      <AppLogout></AppLogout>
+    </div>
+    <div class="col-3">
+    </div>
+  </div>
 </template>
 
 <script>
 import AppNavbar from './components/AppNavbar.vue'
 import AppMainContent from './components/AppMainContent.vue'
 import AppSidebar from './components/AppSidebar.vue'
+import AppLogout from './components/AppLogout.vue'
 
 export default {
   name: 'App',
   components: {
     AppNavbar,
     AppMainContent,
-    AppSidebar
+    AppSidebar,
+    AppLogout
   }
 }
 </script>
