@@ -52,7 +52,7 @@ export default {
     },
     async created() {
         await axios.get(BASE_API_URL + BASE_MOVIE_SERVICE + "/" + this.movieId).then(response => {
-            if (!response.data.isPublished && this.$store.state.isAdmin === null || this.$store.state.isAdmin === false) {
+            if (!response.data.isPublished && this.$store.state.isAdmin !== true) {
                 router.push({ path: '/404' });
             } else {
                 this.movie = response.data;
