@@ -1,6 +1,20 @@
 <template>
     <div>
-        <p>Interdum varius sit amet mattis vulputate enim nulla. Urna nunc id cursus metus aliquam eleifend mi in nulla. Molestie nunc non blandit massa enim nec dui nunc mattis. Sed id semper risus in. Velit scelerisque in dictum non. Nec ullamcorper sit amet risus nullam eget felis eget nunc. Blandit libero volutpat sed cras. Tristique senectus et netus et malesuada fames ac. Ultricies tristique nulla aliquet enim tortor at auctor. At risus viverra adipiscing at in tellus integer feugiat scelerisque. Aenean et tortor at risus viverra adipiscing at in. Scelerisque eleifend donec pretium vulputate sapien nec. Tincidunt augue interdum velit euismod in.</p>
+        <p>
+            TheMovieDistrict is a project that initially developped in September of 2013. 
+        </p>
+        <p>
+            As a cinephile, who always had a fascination for time and evolution of a given environment, I started out by
+            trying to locate specific movie locations from movies I loved, using all sorts of hints I could find -- both
+            on-screen and off the Internet.
+        </p>
+        <p>
+            Eventually, TheMovieDistrict was born.
+        </p>
+        <p>
+            This site is basically a sandbox where I get to document my latest findings. 
+            Hope you appreciate it.
+        </p>
     </div>
 </template>
 

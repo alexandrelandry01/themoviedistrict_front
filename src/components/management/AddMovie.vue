@@ -228,8 +228,8 @@ export default {
     }
 }
 </script>
-<style scoped>
 
+<style scoped>
 .locationExists {
     justify-content: space-around !important;
 }

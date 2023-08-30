@@ -1,9 +1,10 @@
 <template>
     <div>
         <h1>Filming locations for {{ this.movie.title }} ({{ this.movie.yearOfRelease }})</h1>
+        <br />
         <ul>
             <div class="locationContent">
-                <li v-for="location in movie.locations" :key="location.id" style="border: 1px solid black">
+                <li v-for="location in movie.locations" :key="location.id">
                     <div class="locationSq" v-if="!location.isUnknown && !location.isFictional">
                         <p>{{ location.description }}</p>
                         <AppLocationMap :locationInstance="location"></AppLocationMap>
@@ -51,10 +52,13 @@ export default {
     },
     async created() {
         await axios.get(BASE_API_URL + BASE_MOVIE_SERVICE + "/" + this.movieId).then(response => {
-            this.movie = response.data;
+            if (!response.data.isPublished && this.$store.state.isAdmin === null || this.$store.state.isAdmin === false) {
+                router.push({ path: '/404' });
+            } else {
+                this.movie = response.data;
+            }
         }).catch((error) => {
             router.push({ path: '/404' });
-            throw(error);
         });
     }
 }
@@ -108,5 +112,8 @@ p {
 
 .locationSq {
     padding: 20px 50px 20px 50px;
+    margin: 10px 10px 10px 10px;
+    border: 1px solid black;
+    border-radius: 8px;
 }    
 </style>

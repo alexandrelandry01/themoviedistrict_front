@@ -30,7 +30,8 @@ export default {
     },
     async created() {
         await axios.get(BASE_API_URL + BASE_MOVIE_SERVICE + "/search/" + this.paramValue).then(response => {
-            this.moviesReturned = response.data;
+            this.filterResults(response.data);
+            this.moviesReturned = this.filterResults(response.data);
             if (this.moviesReturned.length > 0) {
                 this.searchHasYieldedResults = true;
             } else {
@@ -39,6 +40,14 @@ export default {
         }).catch((error) => {
             throw(error);
         });
+    },
+    methods: {
+        filterResults(movieList) {
+            var filteredResults = movieList.filter(function(movie) {
+                return movie.isPublished === true;
+            });
+            return filteredResults;
+        }
     }
     
 }

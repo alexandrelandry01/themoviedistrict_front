@@ -166,7 +166,11 @@ export default {
     },
     methods: {
         async saveMovie() {
-            await axios.put(BASE_API_URL + BASE_MOVIE_SERVICE + "/updatemovie/" + this.movieId, this.movie).catch((error) => {
+            await axios.put(BASE_API_URL + BASE_MOVIE_SERVICE + "/updatemovie/" + this.movieId, this.movie, {
+                headers: {
+                    "Authorization": `Bearer ${this.$store.state.token}`
+                }
+            }).catch((error) => {
                 throw(error);
             });
             this.movieSaved = true;

@@ -43,8 +43,12 @@ export default {
   padding: 0 !important;
 }
 
+a {
+  text-decoration: none !important;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Georgia, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

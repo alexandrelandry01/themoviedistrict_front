@@ -93,7 +93,11 @@ export default {
             this.selectedPage = pageNumber;
         },
         deleteArticle() {
-            axios.delete(BASE_API_URL + BASE_ARTICLE_SERVICE + "/deletearticle/" + this.selectedArticleId)
+            axios.delete(BASE_API_URL + BASE_ARTICLE_SERVICE + "/deletearticle/" + this.selectedArticleId, {
+                headers: {
+                    "Authorization": `Bearer ${this.$store.state.token}`
+                }
+            })
             .then(response => {
                 this.selectedArticleId = undefined;
                 this.reloadArticles();
