@@ -1,5 +1,6 @@
 <template>
     <div>
+        <br />
         <h4>Latest</h4>
         <ul>
             <li v-for="movie in lastFiveMovies" :key="movie.id">
@@ -33,6 +34,6 @@ export default {
 <style scoped>
 div {
     background-color: firebrick;
-    padding: 0;
+    padding: 0 0 10px 0;
 } 
 </style>

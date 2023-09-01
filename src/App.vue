@@ -5,10 +5,10 @@
     <AppNavbar></AppNavbar>
   </div>
   <div class="row">
-    <div class="col-9 nopadding">
+    <div class="col-md-9 nopadding">
       <AppMainContent></AppMainContent>
     </div>
-    <div class="col-3 nopadding">
+    <div class="col-md-3 nopadding">
       <AppSidebar></AppSidebar>
     </div>
   </div>

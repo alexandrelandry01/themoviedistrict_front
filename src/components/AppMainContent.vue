@@ -13,7 +13,7 @@ export default {
 
 <style>
 .container-fluid {
-    border: 1px dashed black;
+    border: 1px solid black;
     padding: 2% 0 2% 0;
     border-radius: 0 0 5px 5px;
 }
