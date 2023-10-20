@@ -20,6 +20,9 @@
         <div class="alert alert-warning" v-show="this.credentialsAreValid === false">
             Credentials are not valid. Try again.
         </div>
+        <div class="alert alert-warning" v-show="this.accountHasBeenLocked === true">
+            Due to too many failed login attempts, this account has been locked. Try again later.
+        </div>
     </div>
 </template>
 <script>
@@ -33,6 +36,7 @@ export default {
         return {
             credentialsAreValid: Boolean,
             fieldsAreNotFilled: Boolean,
+            accountHasBeenLocked: Boolean,
             credentials: {
                 username: '',
                 password: ''
@@ -44,6 +48,7 @@ export default {
             if (this.fieldsNotFilled()) {
                 this.fieldsAreNotFilled = true;
             } else {
+                this.credentialsAreValid = undefined;
                 await axios.post(BASE_API_URL + BASE_ACCOUNT_SERVICE + "/login", this.credentials).then(response => {
                 this.$store.commit('SET_USER', response.data.userName);
                 this.$store.commit('SET_TOKEN', response.data.token);
@@ -54,7 +59,11 @@ export default {
                     router.push({ path: '/'});
                 }, 1000);
                 }).catch((error) => {
-                    this.credentialsAreValid = false;
+                    if (error.response.status === 401) {
+                        this.credentialsAreValid = false;
+                    } else if (error.response.status === 403) {
+                        this.accountHasBeenLocked = true;
+                    }
                 });
             }        
         },
@@ -64,6 +73,7 @@ export default {
         resetFormStatus() {
             this.credentialsAreValid = undefined;
             this.fieldsAreNotFilled = false;
+            this.accountHasBeenLocked = undefined;
         }
     }
 }

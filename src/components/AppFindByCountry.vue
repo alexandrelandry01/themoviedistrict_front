@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div v-if="this.urlIsValid">
         <h1>{{ this.formatArea(this.countryName) }}</h1>
-        <img :src="require('../assets/flags/' + this.trimArea(this.countryName) + '.png')"/>
+        <img :src="require('../assets/flags/' + this.trimArea(this.countryName) + '.png')"/>     
         <br />
         <br />
         <ul v-if="!this.isCanadaUSOrUK(this.countryName)">
@@ -12,8 +12,8 @@
             </li>
         </ul>
         <ul v-if="this.isCanadaUSOrUK(this.countryName)">
-            <li v-for="territory in this.listOfTerritories['territories']" :key="territory.id">
-                <router-link :to="`/movies/findbycountry/${this.countryName}/${territory.name}`">{{ territory.nameWithCapital }}</router-link>
+            <li v-for="territory in this.listOfTerritories" :key="territory.id">
+                <router-link :to="`/movies/findbycountry/${this.countryName}/${territory.toLowerCase()}`">{{ territory }}</router-link>
             </li>
         </ul>
     </div>
@@ -21,34 +21,40 @@
 <script>
 
 import axios from 'axios'
-import { BASE_API_URL, BASE_MOVIE_SERVICE } from '@/shared/config'
+import { BASE_API_URL, BASE_MOVIE_SERVICE, BASE_LOCATION_SERVICE } from '@/shared/config'
 import router from '../router'
 
-const COUNTRIES = require('../utilityspecs/countries.json');
-const CA_PROVINCES = require('../utilityspecs/caprovinces.json');
-const US_TERRITORIES = require('../utilityspecs/usterritories.json');
-const UK_TERRITORIES = require('../utilityspecs/ukterritories.json');
 const EMPTY_SPACE = ' ';
 
 export default {
     data() {
         return {
-            countryName: this.$route.params.country,
-            listOfCountries: JSON.stringify(COUNTRIES),
+            countryName: this.$route.params.country.toLowerCase(),
             listOfTerritories: null,
-            movies: []
+            movies: [],
+            allowedCountries: null,
+            urlIsValid: false
         }
     },
     async created() {
+        await axios.get(BASE_API_URL + BASE_LOCATION_SERVICE + '/countries').then(response => {
+            this.allowedCountries = response.data;
+            if (!this.allowedCountries.includes(this.formatArea(this.countryName))) {
+                router.push({ path: "/404" });
+            } else {
+                this.urlIsValid = true;
+            }
+        });
+
         if (this.isCanadaUSOrUK(this.countryName)) {
-            this.setListOfTerritories(this.countryName);
+            await axios.get(BASE_API_URL + BASE_LOCATION_SERVICE + '/' + this.countryName).then(response => {
+                    this.listOfTerritories = response.data;
+            });
         } else {
             await axios.get(BASE_API_URL + BASE_MOVIE_SERVICE + "/findbycountry/" + this.countryName).then(response => {
-            if (this.listOfCountries.includes(this.formatArea(this.countryName))) {
-                this.movies = response.data;
-            } else {
-                router.push({ path: "/404" });
-            }
+                if (this.allowedCountries.includes(this.formatArea(this.countryName))) {
+                    this.movies = response.data;
+                }
             }).catch((error) => {
                 throw(error);
             });
@@ -77,20 +83,6 @@ export default {
         isNotNullOrEmpty(value) {
             return (typeof value !== 'undefined') && value !== null && value !== '';
         },
-        setListOfTerritories(country) {
-            switch(country) {
-                case 'canada':
-                    this.listOfTerritories = JSON.parse(JSON.stringify(CA_PROVINCES));
-                    break;
-                case 'united states':
-                    this.listOfTerritories = JSON.parse(JSON.stringify(US_TERRITORIES));
-                    break;
-                case 'united kingdom':
-                    this.listOfTerritories = JSON.parse(JSON.stringify(UK_TERRITORIES));
-                    break;
-                default: 
-            }
-        }
     }
     
 }

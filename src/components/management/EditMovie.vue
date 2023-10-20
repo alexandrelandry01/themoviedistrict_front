@@ -139,14 +139,11 @@ import axios from 'axios'
 import { BASE_API_URL, BASE_MOVIE_SERVICE, BASE_LOCATION_SERVICE } from '@/shared/config'
 import router from '../../router'
 
-const COUNTRIES = require('../../utilityspecs/countries.json');
-
 export default {
     data() {
         return {
             movieId: this.$route.params.id,
             movie: Object,
-            countries: JSON.parse(JSON.stringify(COUNTRIES)),
             movieIsConfirmed: false,
             movieSaved: Boolean,
             locationsSuccessfullyUpdated: Boolean

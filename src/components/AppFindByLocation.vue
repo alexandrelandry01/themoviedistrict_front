@@ -2,23 +2,29 @@
     <div>
         <h1>Find by location</h1>
         <ul>
-            <li v-for="country in this.countries['countries']" :key="country.id">
-                <router-link :to="'/movies/findbycountry/' + country.name">{{ country.nameWithCapital }}</router-link>
+            <li v-for="country in this.countries" :key="country.id">
+                <router-link :to="'/movies/findbycountry/' + country.toLowerCase()">{{ country }}</router-link>
             </li>
         </ul>
     </div>
 </template>
 <script>
 
-const COUNTRIES = require('../utilityspecs/countries.json');
+import axios from 'axios'
+import { BASE_API_URL, BASE_LOCATION_SERVICE } from '@/shared/config'
 
 export default {
     
     data() {
         return {
-            countries: JSON.parse(JSON.stringify(COUNTRIES))
+            countries: []
         }
     },
+    async created() {
+        await axios.get(BASE_API_URL + BASE_LOCATION_SERVICE + '/countries').then(response => {
+            this.countries = response.data;
+        });
+    }
 }
 </script>
 
